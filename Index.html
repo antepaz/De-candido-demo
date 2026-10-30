@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Cándido | Donde comprar es un placer</title>
+<meta name="description" content="El supermercado favorito de las familias zulianas. 70 años acompañándote. Encuentra nuestras 10 sedes, recetas y promociones.">
+
+<!-- ================= OPEN GRAPH (WHATSAPP PREVIEW) ================= -->
+<meta property="og:title" content="De Cándido 🛒 | Donde comprar es un placer">
+<meta property="og:description" content="El supermercado favorito de las familias zulianas. 70 años acompañándote. Encuentra nuestras 10 sedes, recetas y tips.">
+<meta property="og:image" content="https://i.ibb.co/ynsyXG4p/1793132821666-2.jpg">
+<meta property="og:url" content="https://de-candido-demo.netlify.app">
+<meta property="og:type" content="website">
+<!-- ================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --naranja: #f26522; 
+    --naranja-hover: #d9561a;
+    --verde: #009245; 
+    --verde-hover: #007a39;
+    --blanco: #ffffff;
+    --gris-fondo: #f7f7f7;
+    --texto-oscuro: #333333;
+    --texto-gris: #666666;
+    --sombra: 0 8px 24px rgba(0,0,0,0.08);
+    --radio: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--gris-fondo);
+    color: var(--texto-oscuro);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .titulo { font-family: 'Montserrat', sans-serif; }
+
+  .contenedor { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* ==================== VISTAS (PÁGINAS) ==================== */
+  .vista { display: none; }
+  .vista.activa { 
+    display: block; 
+    will-change: opacity, transform;
+    animation: fadeInPage 0.4s ease-in-out forwards; 
+  }
+  @keyframes fadeInPage { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--blanco);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    border-bottom: 3px solid var(--naranja);
+    height: 100px; 
+    display: flex;
+    align-items: center;
+  }
+  .nav { display: flex; align-items: center; justify-content: center; width: 100%; position: relative; height: 100%; }
+  
+  .logo-container { display: flex; align-items: center; justify-content: center; height: 100%; text-decoration: none; cursor: pointer;}
+  
+  .logo-img { 
+    height: 85px; 
+    width: auto; 
+    object-fit: contain; 
+    transition: transform 0.3s;
+  }
+  .logo-container:hover .logo-img { transform: scale(1.05); }
+
+  /* Menú de PC a los lados */
+  .nav-links { position: absolute; left: 0; display: flex; gap: 25px; align-items: center; }
+  .nav-links a { color: var(--texto-oscuro); text-decoration: none; font-size: 14px; font-weight: 700; transition: color 0.2s; font-family: 'Montserrat', sans-serif; cursor: pointer; }
+  .nav-links a:hover { color: var(--naranja); }
+  
+  .nav-social { position: absolute; right: 0; display: flex; gap: 15px; align-items: center; }
+  .nav-social a { display: flex; align-items: center; justify-content: center; }
+  .nav-social svg { width: 22px; height: 22px; fill: var(--texto-oscuro); transition: fill 0.3s; }
+  .nav-social a:hover svg { fill: var(--naranja); }
+
+  @media(max-width: 900px) { 
+    header { height: 85px; } 
+    .logo-img { height: 65px; } 
+    .nav-links { display: none; } 
+    .nav-social { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 80vh; min-height: 500px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center; text-align: center; color: var(--blanco);
+  }
+  .hero-content { max-width: 800px; padding: 20px; }
+  .hero h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+  .hero h1 span { color: var(--naranja); }
+  .hero p { font-size: 20px; margin-bottom: 35px; font-weight: 600; }
+  
+  .btn-hero {
+    display: inline-block; background: var(--naranja); color: var(--blanco); 
+    padding: 16px 40px; font-size: 16px; font-weight: 800; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s; border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(242,101,34,0.4); font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+  }
+  .btn-hero:hover { background: var(--naranja-hover); transform: translateY(-3px); }
+
+  /* SECCIONES */
+  section { padding: 80px 0; scroll-margin-top: 90px; }
+  .titulo-seccion { text-align: center; margin-bottom: 50px; }
+  .titulo-seccion h2 { font-size: clamp(28px, 4vw, 38px); font-weight: 800; color: var(--verde); margin-bottom: 10px; }
+  .titulo-seccion p { color: var(--texto-gris); font-size: 18px; max-width: 600px; margin: 0 auto; }
+
+  /* DEPARTAMENTOS */
+  .grid-categorias { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .cat-card {
+    position: relative; height: 200px; border-radius: var(--radio);
+    overflow: hidden; box-shadow: var(--sombra); text-decoration: none;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s; cursor: pointer;
+  }
+  .cat-card:hover { transform: scale(1.03); }
+  .cat-card::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4); z-index: 1; transition: background 0.3s;
+  }
+  .cat-card:hover::before { background: rgba(0,0,0,0.2); }
+  .cat-card h3 { position: relative; z-index: 2; color: var(--blanco); font-size: 22px; font-weight: 800; text-transform: uppercase; font-family: 'Montserrat', sans-serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); text-align: center; padding: 0 10px;}
+
+  .cat-panaderia { background: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover; }
+  .cat-carniceria { background: url('https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover; }
+  .cat-charcuteria { background: url('https://images.unsplash.com/photo-1541529086526-db283c563270?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover; }
+  .cat-comida { background: url('https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover; }
+  .cat-viveres { background: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover; }
+
+  /* SEDES (ACORDEÓN SUAVE) */
+  #sedes { background: var(--blanco); }
+  .acordeon-sedes { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+  
+  .sede-item {
+    background: var(--gris-fondo); border-radius: var(--radio); overflow: hidden;
+    border-left: 5px solid var(--naranja); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  
+  .sede-header {
+    padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    background: var(--blanco); transition: background 0.2s;
+  }
+  .sede-header:hover { background: #f0f0f0; }
+  .sede-header h3 { color: var(--naranja); font-size: 18px; margin: 0; }
+  .sede-header .icono-flecha { font-size: 20px; color: var(--naranja); transition: transform 0.4s ease; }
+  
+  /* ANIMACIÓN DE ACORDEÓN CON GRID */
+  .sede-contenido {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease-out;
+    background: var(--gris-fondo);
+  }
+  .sede-inner {
+    overflow: hidden;
+    padding: 0 20px;
+    transition: padding 0.4s ease-out;
+  }
+  .sede-item.activo .sede-contenido { grid-template-rows: 1fr; }
+  .sede-item.activo .sede-inner { padding: 20px; }
+  .sede-item.activo .sede-header { background: var(--gris-fondo); }
+  .sede-item.activo .icono-flecha { transform: rotate(180deg); }
+  
+  .sede-contenido p { font-size: 14px; color: var(--texto-gris); margin-bottom: 10px; }
+  .sede-contenido .horario { font-weight: 700; color: var(--verde); font-size: 14px; margin-bottom: 20px; display: block; }
+  .btn-mapa {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blanco); color: var(--naranja); text-decoration: none;
+    padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 14px;
+    border: 1px solid var(--naranja); transition: 0.3s; width: 100%; justify-content: center;
+  }
+  .btn-mapa:hover { background: var(--naranja); color: var(--blanco); }
+
+  /* BANNERS DE ENLACE */
+  .banner-enlace { text-align: center; padding: 60px 20px; }
+  
+  #banner-recetas { background: linear-gradient(135deg, var(--verde) 0%, var(--verde-hover) 100%); color: var(--blanco); }
+  #banner-recetas h2 { color: var(--blanco); }
+  #banner-recetas p { color: rgba(255,255,255,0.9); }
+  #banner-recetas .btn-ir-pagina { background: var(--blanco); color: var(--verde); }
+  
+  #banner-tips { background: var(--blanco); color: var(--verde); border-top: 2px solid #eee; border-bottom: 2px solid #eee; }
+  #banner-tips h2 { color: var(--verde); }
+  #banner-tips p { color: var(--texto-gris); }
+  #banner-tips .btn-ir-pagina { background: var(--verde); color: var(--blanco); }
+  
+  .banner-enlace h2 { font-size: 32px; margin-bottom: 15px; }
+  .banner-enlace p { font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  
+  .btn-ir-pagina {
+    display: inline-block; padding: 15px 40px; border-radius: 50px; font-weight: 800; font-size: 16px;
+    text-decoration: none; transition: 0.3s; cursor: pointer; border: none; font-family: 'Montserrat', sans-serif;
+  }
+  .btn-ir-pagina:hover { transform: scale(1.05); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+  /* ==================== VISTAS INTERNAS ==================== */
+  .header-pagina-interna { background: var(--blanco); padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 40px; }
+  .btn-volver {
+    display: inline-flex; align-items: center; gap: 8px; color: var(--texto-oscuro);
+    text-decoration: none; font-weight: 700; cursor: pointer; background: none; border: none; font-size: 16px; font-family: 'Nunito', sans-serif;
+  }
+  .btn-volver:hover { color: var(--naranja); }
+
+  /* ==================== BUSCADOR DE RECETAS ==================== */
+  .buscador-container {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    position: relative;
+  }
+  .buscador-input {
+    width: 100%;
+    padding: 16px 20px 16px 50px; /* Espacio para la lupa a la izquierda */
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  .buscador-input:focus {
+    border-color: var(--naranja);
+    box-shadow: 0 4px 15px rgba(242,101,34,0.2);
+  }
+  .buscador-icono {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--texto-gris);
+    pointer-events: none; /* Para que se pueda hacer clic a través de él */
+  }
+
+  /* DISEÑO RECETAS CON ANIMACIÓN DE FILTRADO */
+  .grid-recetas-completo { display: flex; flex-direction: column; gap: 0; max-width: 800px; margin: 0 auto; }
+  
+  .receta-wrapper {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-bottom: 40px;
+    transition: grid-template-rows 0.4s ease-in-out, opacity 0.4s ease-in-out, margin-bottom 0.4s ease-in-out;
+  }
+
+  .receta-wrapper.filtrada {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    margin-bottom: 0;
+    pointer-events: none; /* Evita que se pueda hacer clic en una receta oculta */
+  }
+
+  .receta-full {
+    background: var(--blanco); border-radius: var(--radio); padding: 30px;
+    border-top: 5px solid var(--naranja); box-shadow: var(--sombra);
+    overflow: hidden;
+    transition: padding 0.4s ease-in-out, border 0.4s ease-in-out;
+  }
+  
+  .receta-wrapper.filtrada .receta-full {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: none;
+  }
+
+  .receta-full h3 { font-size: 26px; color: var(--naranja); margin-bottom: 15px; }
+  .receta-full .img-principal { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+  
+  .btn-desplegar {
+    background: var(--naranja); color: var(--blanco); border: none; padding: 12px 25px;
+    border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%;
+    font-family: 'Montserrat', sans-serif; font-size: 16px; transition: 0.3s; margin-top: 15px;
+  }
+  .btn-desplegar:hover { background: var(--naranja-hover); }
+
+  .detalles-receta {
+    display: none; margin-top: 20px; background: var(--gris-fondo); padding: 25px; border-radius: 8px;
+  }
+  .detalles-receta.activo { display: block; animation: fadeInPage 0.4s ease; }
+  
+  .detalles-receta h4 { color: var(--verde); font-size: 18px; margin-bottom: 10px; margin-top: 15px; }
+  .detalles-receta ul { margin-left: 20px; margin-bottom: 20px; font-size: 15px; color: var(--texto-gris); }
+  .detalles-receta p { font-size: 15px; color: var(--texto-gris); margin-bottom: 15px; }
+  
+  .btn-ingredientes {
+    display: inline-block; background: var(--verde); color: var(--blanco); text-decoration: none;
+    padding: 12px 25px; border-radius: 50px; font-weight: 700; margin-top: 20px; transition: 0.3s;
+  }
+  .btn-ingredientes:hover { background: var(--verde-hover); }
+
+  /* MENSAJE DE "NO RESULTADOS" */
+  #no-resultados {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    border: 2px dashed #ddd;
+    color: var(--texto-gris);
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  #no-resultados span { font-size: 40px; display: block; margin-bottom: 10px; }
+
+  /* DISEÑO TIPS COMPLETO */
+  .grid-tips-completo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+  .tip-full {
+    background: var(--blanco); border-radius: var(--radio); padding: 30px;
+    border-top: 5px solid var(--verde); box-shadow: var(--sombra);
+  }
+  .tip-full h3 { font-size: 20px; color: var(--verde); margin-bottom: 15px; }
+  .tip-full p { font-size: 15px; color: var(--texto-gris); line-height: 1.8; }
+
+  /* FOOTER */
+  footer { background: #222; color: var(--blanco); padding: 50px 0 30px; text-align: center; }
+  .footer-social { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; }
+  .footer-social a { 
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .footer-social a:hover { background: var(--naranja); transform: translateY(-3px); }
+  .footer-social svg { width: 24px; height: 24px; fill: var(--blanco); }
+  footer p { font-size: 14px; color: #aaa; margin-bottom: 5px; }
+
+  /* =========================================
+     AJUSTES PARA CELULAR
+     ========================================= */
+  @media(max-width: 768px) {
+    header { height: 85px; }
+    .logo-img { height: 65px; } 
+
+    .hero h1 { font-size: 32px; }
+    
+    .grid-categorias { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .cat-card { height: 130px; }
+    .cat-card h3 { font-size: 15px; }
+    
+    .cat-viveres { grid-column: span 2; height: 100px; }
+
+    .receta-full { padding: 20px; }
+    .receta-full h3 { font-size: 22px; }
+    .receta-full .img-principal { height: 200px; }
+    
+    .banner-enlace h2 { font-size: 26px; }
+  }
+
+  /* OCULTAR BADGE DE NETLIFY */
+  iframe[src*="netlify"],
+  iframe[title*="Netlify"],
+  .netlify-badge,
+  div[id*="netlify"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER GLOBAL -->
+<header>
+  <div class="contenedor">
+    <nav class="nav">
+      
+      <!-- Menú de PC (Izquierda) -->
+      <div class="nav-links" id="menu-pc">
+        <a onclick="mostrarVista('inicio')">Inicio</a>
+        <a onclick="mostrarVista('inicio', 'sedes')">Sedes</a>
+        <a onclick="mostrarVista('recetario')">Recetas</a>
+        <a onclick="mostrarVista('tips')">Tips</a>
+      </div>
+
+      <!-- Logo Centrado -->
+      <a class="logo-container" onclick="mostrarVista('inicio')">
+        <img src="https://i.ibb.co/ynsyXG4p/1793132821666-2.jpg" alt="De Cándido" class="logo-img">
+      </a>
+
+      <!-- Redes (Derecha) -->
+      <div class="nav-social">
+        <a href="https://www.instagram.com/tudecandido?vrfl=MTVrY2RjbDFncHVwag==" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@tudecandido?_r=1&_t=ZS-9Aui119MOVb" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+        </a>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== VISTA 1: INICIO ==================== -->
+<main id="vista-inicio" class="vista activa">
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>El supermercado favorito<br><span>de las familias zulianas</span></h1>
+      <p>Donde comprar es un placer. 70 años acompañándote.</p>
+      <a onclick="document.getElementById('sedes').scrollIntoView()" class="btn-hero">Encuentra tu tienda más cercana</a>
+    </div>
+  </section>
+
+  <section id="categorias">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <h2>Nuestros Departamentos</h2>
+        <p>Todo lo que necesitas para tu hogar en un solo lugar.</p>
+      </div>
+      <div class="grid-categorias">
+        <a onclick="document.getElementById('sedes').scrollIntoView()" class="cat-card cat-panaderia"><h3>Panadería</h3></a>
+        <a onclick="document.getElementById('sedes').scrollIntoView()" class="cat-card cat-carniceria"><h3>Carnicería</h3></a>
+        <a onclick="document.getElementById('sedes').scrollIntoView()" class="cat-card cat-charcuteria"><h3>Charcutería</h3></a>
+        <a onclick="document.getElementById('sedes').scrollIntoView()" class="cat-card cat-comida"><h3>Comida Preparada</h3></a>
+        <a onclick="document.getElementById('sedes').scrollIntoView()" class="cat-card cat-viveres"><h3>Víveres</h3></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="sedes">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <h2>Nuestras 10 Sedes</h2>
+        <p>Toca una sede para ver su dirección y horario.</p>
+      </div>
+
+      <div class="acordeon-sedes">
+        
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Santa Rita</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Av. 8 (Santa Rita) con esquina calle 70</p>
+              <span class="horario">L-S: 8:00 AM - 9:00 PM | Dom: 8:00 AM - 4:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Santa+Rita" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Circunvalación 2</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Av. Circunvalación 2, vía Hotel Maruma</p>
+              <span class="horario">L-S: 8:00 AM - 8:00 PM | Dom: 8:00 AM - 4:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Circunvalacion+2" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Delicias</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Av. 15 con Circunvalación 2, Prol. Delicias</p>
+              <span class="horario">L-S: 8:00 AM - 8:00 PM | Dom: 8:00 AM - 4:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Delicias" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Cabimas</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Av. Universidad calle Chile, Cabimas</p>
+              <span class="horario">L-S: 8:00 AM - 9:00 PM | Dom: 8:00 AM - 4:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Cabimas" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Indio Mara IPSFA</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Av. 22 frente al Cuartel Libertador</p>
+              <span class="horario">L-S: 8:00 AM - 8:00 PM | Dom: 8:00 AM - 4:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Indio+Mara" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>La Lago</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Sector La Lago, calle 72, frente a Plaza Yépez</p>
+              <span class="horario">L-S: 8:00 AM - 9:00 PM | Dom: 9:00 AM - 5:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+La+Lago" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Ciudad Ojeda</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>C.C. Ojeda Plaza, Av. Intercomunal con Av. Bolívar</p>
+              <span class="horario">L-S: 9:00 AM - 8:00 PM | Dom: No labora</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Ciudad+Ojeda" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Express Fuerzas Armadas</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Av. 15 Delicias con Circ. 2 y Fuerzas Armadas</p>
+              <span class="horario">L-S: 6:30 AM - 10:00 PM | Dom: 6:30 AM - 10:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Express+Fuerzas+Armadas" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Express Calle 73</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Av. 4 Bella Vista con calle 73</p>
+              <span class="horario">L-S: 6:30 AM - 10:00 PM | Dom: 6:30 AM - 10:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Express+Calle+73" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sede-item">
+          <div class="sede-header" onclick="toggleSede(this)">
+            <h3>Express Santa Lucía</h3>
+            <span class="icono-flecha">▼</span>
+          </div>
+          <div class="sede-contenido">
+            <div class="sede-inner">
+              <p>Antigua cervecería Zulia, frente a Biblioteca Pública</p>
+              <span class="horario">L-S: 6:30 AM - 10:00 PM | Dom: 6:30 AM - 10:00 PM</span>
+              <a href="https://www.google.com/maps/search/?api=1&query=De+Candido+Express+Santa+Lucia" target="_blank" class="btn-mapa">📍 Cómo llegar en Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER RECETAS -->
+  <section id="banner-recetas" class="banner-enlace">
+    <div class="contenedor">
+      <h2>El Rincón de la Nonna</h2>
+      <p>Descubre las mejores recetas para compartir en familia y consigue todos los ingredientes en nuestras tiendas.</p>
+      <button class="btn-ir-pagina" onclick="mostrarVista('recetario')">Ver todas las recetas</button>
+    </div>
+  </section>
+
+  <!-- BANNER TIPS -->
+  <section id="banner-tips" class="banner-enlace">
+    <div class="contenedor">
+      <h2>Tips para el Hogar</h2>
+      <p>Aprende los mejores consejos para conservar tus alimentos y cuidar tus utensilios de cocina.</p>
+      <button class="btn-ir-pagina" onclick="mostrarVista('tips')">Ver todos los tips</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== VISTA 2: RECETARIO ==================== -->
+<main id="vista-recetario" class="vista">
+  
+  <div class="header-pagina-interna">
+    <div class="contenedor">
+      <button class="btn-volver" onclick="mostrarVista('inicio')">← Volver al Inicio</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <h2>El Recetario de la Nonna</h2>
+        <p>Busca tu receta favorita o explora las opciones disponibles.</p>
+      </div>
+
+      <!-- BUSCADOR CON LUPA -->
+      <div class="buscador-container">
+        <span class="buscador-icono">🔍</span>
+        <input type="text" id="buscadorRecetas" class="buscador-input" placeholder="Buscar receta (ej. Hallacas, Tequeños)..." oninput="filtrarRecetas()">
+      </div>
+
+      <div class="grid-recetas-completo" id="listaRecetas">
+        
+        <div class="receta-wrapper">
+          <div class="receta-full">
+            <h3>Hallacas Tradicionales</h3>
+            <img src="https://images.unsplash.com/photo-1608039755401-742074f0548d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-principal" alt="Hallacas">
+            <p>El plato estrella de la navidad venezolana. Una mezcla de sabores que une a la familia.</p>
+            <button class="btn-desplegar" onclick="toggleReceta('r1')">Ver Preparación y Detalles</button>
+            <div class="detalles-receta" id="r1">
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>Harina de maíz precocida (para la masa)</li>
+                <li>Carne de res y pollo picado</li>
+                <li>Cebolla, ajo, pimentón, ají dulce</li>
+                <li>Pasas, alcaparras y aceitunas</li>
+                <li>Hojas de plátano, onoto y manteca de cerdo</li>
+              </ul>
+              <h4>Preparación</h4>
+              <p><strong>Dificultad:</strong> Alta | <strong>Tiempo:</strong> 3 horas | <strong>Porción:</strong> 10 personas</p>
+              <p>Prepara el guiso cocinando las carnes con los aliños y el vino. Amasa la harina con caldo, onoto y manteca. Extiende las hojas de plátano, unta un poco de aceite, coloca una bola de masa, extiéndela, pon el guiso con pasas y alcaparras, y envuelve con cuidado. Amarra la hallaca y hiérvelas en agua con sal por 1 hora y media.</p>
+              <a href="#sedes" class="btn-ingredientes" onclick="mostrarVista('inicio'); setTimeout(()=>{document.getElementById('sedes').scrollIntoView()}, 100)">🛒 Conseguir ingredientes</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="receta-wrapper">
+          <div class="receta-full">
+            <h3>Pabellón Criollo</h3>
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-principal" alt="Pabellón">
+            <p>El plato nacional por excelencia. Carne mechada, caraotas negras, arroz y tajadas.</p>
+            <button class="btn-desplegar" onclick="toggleReceta('r2')">Ver Preparación y Detalles</button>
+            <div class="detalles-receta" id="r2">
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>Carne de falda (para mechar)</li>
+                <li>Caraotas negras</li>
+                <li>Arroz blanco</li>
+                <li>Plátanos maduros (para tajadas)</li>
+                <li>Cebolla, ajo, comino, sal</li>
+              </ul>
+              <h4>Preparación</h4>
+              <p><strong>Dificultad:</strong> Media | <strong>Tiempo:</strong> 2 horas | <strong>Porción:</strong> 4 personas</p>
+              <p>Cocina la carne hasta que esté blanda y desméchala. Haz un sofrito con cebolla y tomate, y mezcla con la carne. Cocina las caraotas con cebolla y ajo. Prepara el arroz blanco. Corta los plátanos en rodajas y fríelos hasta que estén dorados. Sirve todo junto en un plato.</p>
+              <a href="#sedes" class="btn-ingredientes" onclick="mostrarVista('inicio'); setTimeout(()=>{document.getElementById('sedes').scrollIntoView()}, 100)">🛒 Conseguir ingredientes</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="receta-wrapper">
+          <div class="receta-full">
+            <h3>Arepas Rellenas de Queso</h3>
+            <!-- FOTO CORREGIDA CON PLACEHOLDER DE RESPALDO -->
+            <img src="https://placehold.co/800x400/f26522/FFFFFF?text=Foto+de+Arepas" class="img-principal" alt="Arepas">
+            <p>El desayuno perfecto. Crujientes por fuera, suaves por dentro y llenas de queso derretido.</p>
+            <button class="btn-desplegar" onclick="toggleReceta('r3')">Ver Preparación y Detalles</button>
+            <div class="detalles-receta" id="r3">
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>2 tazas de harina de maíz precocida</li>
+                <li>2.5 tazas de agua tibia</li>
+                <li>1 cucharadita de sal</li>
+                <li>Queso blanco duro rallado (al gusto)</li>
+                <li>Mantequilla</li>
+              </ul>
+              <h4>Preparación</h4>
+              <p><strong>Dificultad:</strong> Fácil | <strong>Tiempo:</strong> 20 min | <strong>Porción:</strong> 4 personas</p>
+              <p>Mezcla el agua con la sal. Agrega la harina poco a poco y amasa hasta formar una masa suave. Forma bolas, aplánalas un poco y cocínalas en un budare o sartén engrasado por 5 minutos de cada lado. Ábrelas por la mitad, rellénalas de queso y dóralas de nuevo si deseas que el queso se derrita.</p>
+              <a href="#sedes" class="btn-ingredientes" onclick="mostrarVista('inicio'); setTimeout(()=>{document.getElementById('sedes').scrollIntoView()}, 100)">🛒 Conseguir ingredientes</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="receta-wrapper">
+          <div class="receta-full">
+            <h3>Tequeños Crujientes</h3>
+            <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-principal" alt="Tequeños">
+            <p>El pasapalo favorito de todos. Palitos de queso envueltos en masa y fritos.</p>
+            <button class="btn-desplegar" onclick="toggleReceta('r4')">Ver Preparación y Detalles</button>
+            <div class="detalles-receta" id="r4">
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>2 tazas de harina de trigo</li>
+                <li>1 huevo</li>
+                <li>1/2 taza de leche o agua</li>
+                <li>2 cucharadas de mantequilla</li>
+                <li>Queso blanco duro en bastones</li>
+                <li>Aceite para freír</li>
+              </ul>
+              <h4>Preparación</h4>
+              <p><strong>Dificultad:</strong> Media | <strong>Tiempo:</strong> 40 min | <strong>Porción:</strong> 6 personas</p>
+              <p>Amasa la harina con el huevo, la mantequilla y la leche hasta obtener una masa elástica. Deja reposar por 15 minutos. Estira la masa, córtala en tiras, coloca un bastón de queso y envuélvelo. Sella bien las orillas. Fríe en abundante aceite caliente hasta que estén dorados.</p>
+              <a href="#sedes" class="btn-ingredientes" onclick="mostrarVista('inicio'); setTimeout(()=>{document.getElementById('sedes').scrollIntoView()}, 100)">🛒 Conseguir ingredientes</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="receta-wrapper">
+          <div class="receta-full">
+            <h3>Asado Negro</h3>
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-principal" alt="Asado Negro">
+            <p>Un plato lleno de historia y sabor. Carne de res cocinada en un dulce y oscuro caramelo.</p>
+            <button class="btn-desplegar" onclick="toggleReceta('r5')">Ver Preparación y Detalles</button>
+            <div class="detalles-receta" id="r5">
+              <h4>Ingredientes</h4>
+              <ul>
+                <li>1 kg de muchacho redondo</li>
+                <li>Papelón (panela) para el caramelo</li>
+                <li>Vino tinto</li>
+                <li>Cebolla, ajo, pimentón, ají dulce</li>
+                <li>Salsa inglesa y sal</li>
+              </ul>
+              <h4>Preparación</h4>
+              <p><strong>Dificultad:</strong> Media | <strong>Tiempo:</strong> 2.5 horas | <strong>Porción:</strong> 6 personas</p>
+              <p>Haz un caramelo con el papelón y un poco de agua. Sella la carne en una olla. Licúa el sofrito (cebolla, ajo, pimentón) con el vino y la salsa inglesa. Agrega esto a la olla junto con el caramelo y cocina a fuego lento hasta que la carne esté muy blanda. Corta en rodajas y baña con la salsa.</p>
+              <a href="#sedes" class="btn-ingredientes" onclick="mostrarVista('inicio'); setTimeout(()=>{document.getElementById('sedes').scrollIntoView()}, 100)">🛒 Conseguir ingredientes</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MENSAJE SI NO HAY RESULTADOS -->
+      <div id="no-resultados">
+        <span>🍳</span>
+        No encontramos esa receta.<br>¡Intenta buscando con otra palabra!
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- ==================== VISTA 3: TIPS ==================== -->
+<main id="vista-tips" class="vista">
+  
+  <div class="header-pagina-interna">
+    <div class="contenedor">
+      <button class="btn-volver" onclick="mostrarVista('inicio')">← Volver al Inicio</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <h2>Tips para el Hogar</h2>
+        <p>Pequeños consejos que hacen la diferencia en tu día a día.</p>
+      </div>
+
+      <div class="grid-tips-completo">
+        
+        <div class="tip-full">
+          <h3>Conservación de Verduras</h3>
+          <p>Para conservar las verduras sin perder sus propiedades, no las guardes en la nevera si son de hoja verde (como la lechuga o espinaca). Guárdalas en un lugar fresco y seco, envueltas en papel absorbente.</p>
+        </div>
+
+        <div class="tip-full">
+          <h3>¿Cómo conservar las frutas?</h3>
+          <p>Existen frutas que pierden propiedades y nutrientes si se guardan en la nevera (como el plátano o el aguacate). Mantenlas a temperatura ambiente hasta que estén maduras, y luego refrigéralas para prolongar su vida.</p>
+        </div>
+
+        <div class="tip-full">
+          <h3>Cuidado de Ollas y Sartenes</h3>
+          <p>Evita mojar las ollas y sartenes con agua fría mientras estén calientes, ya que el cambio brusco de temperatura puede deformar el metal. Lávalos siempre con la parte suave de la esponja.</p>
+        </div>
+
+        <div class="tip-full">
+          <h3>Los 5 aceites más saludables</h3>
+          <p>Si te gusta alimentarte saludablemente, ten en cuenta el tipo de aceite. El aceite de oliva extra virgen es ideal para ensaladas; el de aguacate y el de coco son perfectos para cocinar a altas temperaturas.</p>
+        </div>
+
+        <div class="tip-full">
+          <h3>Conservación de la carne</h3>
+          <p>La carne fresca debe guardarse en la parte más fría de la nevera. Si no la vas a consumir en 2 días, congélala en porciones individuales para evitar descongelar y volver a congelar.</p>
+        </div>
+
+        <div class="tip-full">
+          <h3>Evita el desperdicio de alimentos</h3>
+          <p>Revisa tu nevera antes de ir al supermercado. Haz una lista de lo que realmente necesitas. Coloca los alimentos más antiguos al frente de la nevera para que los consumas primero.</p>
+        </div>
+
+        <div class="tip-full">
+          <h3>El truco del limón</h3>
+          <p>Si necesitas unas gotas de limón, no cortes la fruta por la mitad. Introduce un palillo o aguja fina por un extremo y exprime la cantidad necesaria. Así el limón se conservará fresco por más tiempo.</p>
+        </div>
+
+        <div class="tip-full">
+          <h3>Conserva el pan fresco</h3>
+          <p>Para que el pan dure más, guárdalo en una bolsa de papel en lugar de plástico. Si quieres congelarlo, córtalo en rodajas primero para poder sacar solo lo que necesites.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER GLOBAL -->
+<footer>
+  <div class="contenedor">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/tudecandido?vrfl=MTVrY2RjbDFncHVwag==" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@tudecandido?_r=1&_t=ZS-9Aui119MOVb" target="_blank" aria-label="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+      </a>
+    </div>
+    <p>© 2024 VÍVERES DE CÁNDIDO. Todos los derechos reservados. RIF: J-07020152-5</p>
+    <p style="font-size: 12px; opacity: 0.5;">Página de demostración · Las imágenes son referenciales</p>
+  </div>
+</footer>
+
+<script>
+  // --- SISTEMA DE VISTAS CON ANIMACIÓN MEJORADA ---
+  function mostrarVista(idVista, seccionScrollear = null) {
+    document.querySelectorAll('.vista').forEach(vista => vista.classList.remove('activa'));
+    window.scrollTo(0, 0);
+
+    const vistaActiva = document.getElementById('vista-' + idVista);
+    setTimeout(() => {
+      vistaActiva.classList.add('activa');
+    }, 10);
+
+    if (seccionScrollear) {
+      setTimeout(() => {
+        document.getElementById(seccionScrollear).scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }
+
+  // --- ACORDEÓN DE SEDES ---
+  function toggleSede(element) {
+    const sedeItem = element.parentElement;
+    const isActive = sedeItem.classList.contains('activo');
+    
+    document.querySelectorAll('.sede-item').forEach(item => {
+      item.classList.remove('activo');
+    });
+    
+    if (!isActive) {
+      sedeItem.classList.add('activo');
+    }
+  }
+
+  // --- ACORDEÓN DE RECETAS ---
+  function toggleReceta(idReceta) {
+    const panel = document.getElementById(idReceta);
+    const boton = panel.previousElementSibling;
+    
+    if (panel.classList.contains('activo')) {
+      panel.classList.remove('activo');
+      boton.textContent = 'Ver Preparación y Detalles';
+    } else {
+      panel.classList.add('activo');
+      boton.textContent = 'Ocultar Detalles';
+    }
+  }
+
+  // --- BUSCADOR DE RECETAS ---
+  function filtrarRecetas() {
+    const input = document.getElementById('buscadorRecetas');
+    const filtro = input.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
+    const recetas = document.querySelectorAll('.receta-wrapper');
+    const mensajeNoResultados = document.getElementById('no-resultados');
+    let recetasVisibles = 0;
+
+    recetas.forEach(receta => {
+      const titulo = receta.querySelector('h3').textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      
+      if (titulo.includes(filtro)) {
+        receta.classList.remove('filtrada');
+        recetasVisibles++;
+      } else {
+        receta.classList.add('filtrada');
+      }
+    });
+
+    if (recetasVisibles === 0) {
+      mensajeNoResultados.style.display = 'block';
+    } else {
+      mensajeNoResultados.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
