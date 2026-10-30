@@ -88,11 +88,39 @@
   .nav-social svg { width: 22px; height: 22px; fill: var(--texto-oscuro); transition: fill 0.3s; }
   .nav-social a:hover svg { fill: var(--naranja); }
 
+  /* HAMBURGUESA */
+  .hamburger-btn {
+    display: none; background: none; border: none; color: var(--texto-oscuro);
+    font-size: 28px; cursor: pointer; padding: 5px; position: absolute; right: 0; z-index: 2;
+    transition: transform 0.2s;
+  }
+  .hamburger-btn:active { transform: scale(0.9); }
+
+  /* MENÚ MÓVIL ANIMADO */
+  .mobile-menu {
+    display: flex; flex-direction: column; position: absolute;
+    top: 100px; left: 0; width: 100%; background: var(--blanco);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1); z-index: 49;
+    max-height: 0; opacity: 0; visibility: hidden; overflow: hidden;
+    padding: 0 20px; transform: translateY(-15px);
+    transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.3s ease, visibility 0.4s;
+  }
+  .mobile-menu.activo { 
+    max-height: 350px; opacity: 1; visibility: visible; padding: 10px 20px 20px; transform: translateY(0);
+  }
+  .mobile-menu a {
+    color: var(--texto-oscuro); text-decoration: none; font-size: 15px; font-weight: 700;
+    padding: 15px 0; border-bottom: 1px solid #eee; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; font-family: 'Montserrat', sans-serif;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+
   @media(max-width: 900px) { 
     header { height: 85px; } 
     .logo-img { height: 65px; } 
     .nav-links { display: none; } 
     .nav-social { display: none; }
+    .hamburger-btn { display: block; }
+    .mobile-menu { top: 85px; }
   }
 
   /* HERO */
@@ -226,7 +254,7 @@
   }
   .buscador-input {
     width: 100%;
-    padding: 16px 20px 16px 50px; /* Espacio para la lupa a la izquierda */
+    padding: 16px 20px 16px 50px;
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
     border: 2px solid #ddd;
@@ -246,7 +274,7 @@
     transform: translateY(-50%);
     font-size: 20px;
     color: var(--texto-gris);
-    pointer-events: none; /* Para que se pueda hacer clic a través de él */
+    pointer-events: none;
   }
 
   /* DISEÑO RECETAS CON ANIMACIÓN DE FILTRADO */
@@ -264,7 +292,7 @@
     grid-template-rows: 0fr;
     opacity: 0;
     margin-bottom: 0;
-    pointer-events: none; /* Evita que se pueda hacer clic en una receta oculta */
+    pointer-events: none;
   }
 
   .receta-full {
@@ -404,7 +432,17 @@
         </a>
       </div>
 
+      <!-- Botón Hamburguesa (Móvil) -->
+      <button class="hamburger-btn" id="hamburgerBtn">☰</button>
     </nav>
+
+    <!-- Menú Móvil Desplegable -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a onclick="mostrarVista('inicio'); cerrarMenuMovil()">Inicio</a>
+      <a onclick="mostrarVista('inicio', 'sedes'); cerrarMenuMovil()">Sedes</a>
+      <a onclick="mostrarVista('recetario'); cerrarMenuMovil()">Recetas</a>
+      <a onclick="mostrarVista('tips'); cerrarMenuMovil()">Tips</a>
+    </div>
   </div>
 </header>
 
@@ -681,7 +719,7 @@
         <div class="receta-wrapper">
           <div class="receta-full">
             <h3>Arepas Rellenas de Queso</h3>
-            <!-- FOTO CORREGIDA CON PLACEHOLDER DE RESPALDO -->
+            <!-- FOTO CON PLACEHOLDER DE RESPALDO -->
             <img src="https://placehold.co/800x400/f26522/FFFFFF?text=Foto+de+Arepas" class="img-principal" alt="Arepas">
             <p>El desayuno perfecto. Crujientes por fuera, suaves por dentro y llenas de queso derretido.</p>
             <button class="btn-desplegar" onclick="toggleReceta('r3')">Ver Preparación y Detalles</button>
@@ -856,6 +894,20 @@
         document.getElementById(seccionScrollear).scrollIntoView({ behavior: 'smooth' });
       }, 300);
     }
+  }
+
+  // --- MENÚ HAMBURGUESA ---
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburgerBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('activo');
+    hamburgerBtn.innerHTML = mobileMenu.classList.contains('activo') ? '✕' : '☰';
+  });
+
+  function cerrarMenuMovil() {
+    mobileMenu.classList.remove('activo');
+    hamburgerBtn.innerHTML = '☰';
   }
 
   // --- ACORDEÓN DE SEDES ---
